@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
 function Header() {
+  // Login state
   const [haveMetamask, sethaveMetamask] = useState(true);
   const [accountAddress, setAccountAddress] = useState('');
   const [accountBalance, setAccountBalance] = useState('');
