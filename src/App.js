@@ -14,8 +14,6 @@ function App() {
     <Header/>
     <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/NftGallery" element={<NftGallery />} /> */}
-        {/* <Route path="/Swap" element={<Swap />} /> */}
         <Route path="/Participant" element={<Participant />} />
         <Route path="/Organizer" element={<Organizer />} />
         <Route path="/PersonalCenter" element={<PersonalCenter />} />

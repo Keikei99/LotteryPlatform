@@ -4,11 +4,76 @@ import { useConnect, useAccount } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 
 import axios from "axios";
-import { usePrepareContractWrite} from "wagmi";
+import { usePrepareContractWrite } from "wagmi";
 import { useContractWrite } from "wagmi";
 import { useContractRead } from 'wagmi';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
+
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar, Space } from 'antd';
+import { DownOutlined, FrownFilled, MehOutlined, SmileOutlined, FrownOutlined } from '@ant-design/icons';
+import { Tree } from 'antd';
+
+const treeData1 = [
+  {
+    title: 'Victory Events',
+    key: '0-0',
+    icon: <SmileOutlined />,
+    children: [
+      {
+        title: 'Event1',
+        key: '0-0-0',
+        icon: <MehOutlined />,
+      },
+      {
+        title: 'Event2',
+        key: '0-0-1',
+        icon: ({ selected }) => (selected ? <FrownFilled /> : <FrownOutlined />),
+      },
+    ],
+  },
+];
+
+const treeData2 = [
+  {
+    title: 'Participated Events',
+    key: '0-0',
+    icon: <SmileOutlined />,
+    children: [
+      {
+        title: 'Event1',
+        key: '1-0-0',
+        icon: <MehOutlined />,
+      },
+      {
+        title: 'Event2',
+        key: '1-0-1',
+        icon: ({ selected }) => (selected ? <FrownFilled /> : <FrownOutlined />),
+      },
+    ],
+  },
+];
+
+const treeData3 = [
+  {
+    title: 'Created Events',
+    key: '0-0',
+    icon: <SmileOutlined />,
+    children: [
+      {
+        title: 'Event1',
+        key: '2-0-0',
+        icon: <MehOutlined />,
+      },
+      {
+        title: 'Event2',
+        key: '2-0-1',
+        icon: ({ selected }) => (selected ? <FrownFilled /> : <FrownOutlined />),
+      },
+    ],
+  },
+];
 
 function PersonalCenter() {
 
@@ -52,17 +117,21 @@ function PersonalCenter() {
 
   // TODO: To disconnect with metamask
   const disconnectWallet = async () => {
-    alert("disconnect");
+    alert(`Disconnect with address ${accountAddress}`);
     setAccountAddress('');
     setAccountBalance('');
     setIsConnected(false);
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="PersonalCenter-div">
+      <h1>Personal Center</h1>
+      <Space direction="vertical" size={16}>
+        <Space wrap size={16}>
+          <Avatar size={64} icon={<UserOutlined />} />
+        </Space>
         {haveMetamask ? (
-          <div className="App-header">
+          <div className="PersonalCenter-header">
             {isConnected ? (
               <div className="card">
                 <div className="card-row">
@@ -71,13 +140,35 @@ function PersonalCenter() {
                     {accountAddress}
                   </p>
                 </div>
-                <div className="card-row">
+                {/* <div className="card-row">
                   <h3>Wallet Balance:</h3>
                   <p>{accountBalance}</p>
-                </div>
+                </div> */}
+                {/* TODO: 加入个人中心的内容 */}
+                <Tree
+                  showIcon
+                  defaultExpandAll
+                  defaultSelectedKeys={['0-0-0']}
+                  switcherIcon={<DownOutlined />}
+                  treeData={treeData1}
+                />
+                <Tree
+                  showIcon
+                  defaultExpandAll
+                  defaultSelectedKeys={['0-0-0']}
+                  switcherIcon={<DownOutlined />}
+                  treeData={treeData2}
+                />
+                <Tree
+                  showIcon
+                  defaultExpandAll
+                  defaultSelectedKeys={['0-0-0']}
+                  switcherIcon={<DownOutlined />}
+                  treeData={treeData3}
+                />
               </div>
             ) : (
-              <h1>Personal Center</h1>
+              <h2>Connect with your wallet and then you can check your personal center.</h2>
             )}
             {isConnected ? (
               <button className="disconnectBtn" onClick={disconnectWallet}>
@@ -92,7 +183,9 @@ function PersonalCenter() {
         ) : (
           <p>Please Install MataMask</p>
         )}
-      </header>
+      </Space>
+
+
     </div>
   );
 }
