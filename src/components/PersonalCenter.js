@@ -10,70 +10,11 @@ import { useContractRead } from 'wagmi';
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 
+import Event from './Event'
+import {EventLists, VictoryEventLists, ParticipatedEventLists, CreatedEventLists} from '../testData/EventLists';
+
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Space } from 'antd';
-import { DownOutlined, FrownFilled, MehOutlined, SmileOutlined, FrownOutlined } from '@ant-design/icons';
-import { Tree } from 'antd';
-
-const treeData1 = [
-  {
-    title: 'Victory Events',
-    key: '0-0',
-    icon: <SmileOutlined />,
-    children: [
-      {
-        title: 'Event1',
-        key: '0-0-0',
-        icon: <MehOutlined />,
-      },
-      {
-        title: 'Event2',
-        key: '0-0-1',
-        icon: ({ selected }) => (selected ? <FrownFilled /> : <FrownOutlined />),
-      },
-    ],
-  },
-];
-
-const treeData2 = [
-  {
-    title: 'Participated Events',
-    key: '0-0',
-    icon: <SmileOutlined />,
-    children: [
-      {
-        title: 'Event1',
-        key: '1-0-0',
-        icon: <MehOutlined />,
-      },
-      {
-        title: 'Event2',
-        key: '1-0-1',
-        icon: ({ selected }) => (selected ? <FrownFilled /> : <FrownOutlined />),
-      },
-    ],
-  },
-];
-
-const treeData3 = [
-  {
-    title: 'Created Events',
-    key: '0-0',
-    icon: <SmileOutlined />,
-    children: [
-      {
-        title: 'Event1',
-        key: '2-0-0',
-        icon: <MehOutlined />,
-      },
-      {
-        title: 'Event2',
-        key: '2-0-1',
-        icon: ({ selected }) => (selected ? <FrownFilled /> : <FrownOutlined />),
-      },
-    ],
-  },
-];
 
 function PersonalCenter() {
 
@@ -140,42 +81,41 @@ function PersonalCenter() {
                     {accountAddress}
                   </p>
                 </div>
-                {/* <div className="card-row">
-                  <h3>Wallet Balance:</h3>
-                  <p>{accountBalance}</p>
-                </div> */}
-                {/* TODO: 加入个人中心的内容 */}
-                <Tree
-                  showIcon
-                  defaultExpandAll
-                  defaultSelectedKeys={['0-0-0']}
-                  switcherIcon={<DownOutlined />}
-                  treeData={treeData1}
-                />
-                <Tree
-                  showIcon
-                  defaultExpandAll
-                  defaultSelectedKeys={['0-0-0']}
-                  switcherIcon={<DownOutlined />}
-                  treeData={treeData2}
-                />
-                <Tree
-                  showIcon
-                  defaultExpandAll
-                  defaultSelectedKeys={['0-0-0']}
-                  switcherIcon={<DownOutlined />}
-                  treeData={treeData3}
-                />
+                <div className="victory-event">
+                  <h2>Victory Events</h2>
+                {
+                  VictoryEventLists.map((event) => {
+                    return <Event propEvent={event} />
+                  })
+                }
+                </div>
+                <h2>Participated Events</h2>
+                <div className="participated-event">
+                {
+                  ParticipatedEventLists.map((event) => {
+                    return <Event propEvent={event} />
+                  })
+                }
+                </div>
+                <div className="created-event">
+                <h2>Created Events</h2>
+                {
+                  CreatedEventLists.map((event) => {
+                    return <Event propEvent={event} />
+                  })
+                }
+                </div>
+                
               </div>
             ) : (
               <h2>Connect with your wallet and then you can check your personal center.</h2>
             )}
             {isConnected ? (
-              <button className="disconnectBtn" onClick={disconnectWallet}>
+              <button className="connectButton" onClick={disconnectWallet}>
                 DisConnect
               </button>
             ) : (
-              <button className="connectBtn" onClick={connectWallet}>
+              <button className="connectButton" onClick={connectWallet}>
                 Connect
               </button>
             )}
@@ -184,7 +124,9 @@ function PersonalCenter() {
           <p>Please Install MataMask</p>
         )}
       </Space>
+      
 
+      
 
     </div>
   );

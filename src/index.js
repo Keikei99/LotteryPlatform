@@ -6,9 +6,10 @@ import { BrowserRouter } from "react-router-dom";
 import { configureChains, mainnet, WagmiConfig, createClient } from 'wagmi'
 import { publicProvider } from 'wagmi/providers/public'
 import { avalancheFuji } from '@wagmi/chains';
+import { goerli } from '@wagmi/chains';
 
 const { provider, webSocketProvider } = configureChains(
-  [mainnet, avalancheFuji],
+  [mainnet, goerli],
   [publicProvider()],
 );
  

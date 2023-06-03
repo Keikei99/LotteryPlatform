@@ -33,6 +33,7 @@ function Organizer() {
     eventName: '',
     eventImage: '', // 暂时先改空字符串
     profile: '',
+    organizer: '',
     promotionLink: '',
     jackpot: '',
     startTime: new Date(),
@@ -120,6 +121,7 @@ function Organizer() {
       eventName: '',
       eventImage: '', // 暂时先改空字符串
       profile: '',
+      organizer: '',
       promotionLink: '',
       jackpot: '',
       startTime: new Date(),
@@ -172,6 +174,20 @@ function Organizer() {
               />
             </td>
           </tr>
+
+          <tr>
+            <td>Your Name:</td>
+            <td>
+              <Input
+                placeholder="Your Name"
+                type="text"
+                name="organizer"
+                value={event.organizer}
+                onChange={handleTextInputChange}
+              />
+            </td>
+          </tr>
+
           {/* TODO: Jackpot Amount: */}
           <tr>
             <td>Jackpot Amount:</td>
