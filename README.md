@@ -1,7 +1,4 @@
-# branch-0528
+# branch-0603
 
-* Achieve the function of Event Creation;
-* Ready to achieve the login function and personalCenter page.
-
-* 登录态管理
-* 个人中心
+* Complete the PersonalCenter Page.
+* Ready to achieve the interaction with backend and smart contract.
